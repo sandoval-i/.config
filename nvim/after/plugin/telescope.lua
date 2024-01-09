@@ -2,6 +2,7 @@ local builtin = require("telescope.builtin")
 local keymap = vim.keymap
 
 keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[s]earch [f]iles" })
+keymap.set("n", "<leader>sg", builtin.git_files, { desc = "[<Space>] [s]earch [g]it files" })
 keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[s]earch [h]elp" })
 keymap.set("n", "<leader><space>", builtin.buffers, { desc = "[<Space>] Find existing buffers" })
 
