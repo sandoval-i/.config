@@ -51,7 +51,7 @@ floating_modifier Mod1
 
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
-tiling_drag modifier titlebar
+# tiling_drag modifier titlebar
 
 # start a terminal
 bindsym Mod1+Escape exec i3-sensible-terminal
@@ -212,3 +212,4 @@ bar {
 # Please remove the following exec line:
 #######################################################################
 exec i3-config-wizard
+xinput set-prop "MSFT0001:00 06CB:7F28 Touchpad" "libinput Tapping Enabled" 1
