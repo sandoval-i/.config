@@ -1,7 +1,8 @@
 local keymap = vim.keymap
 vim.g.mapleader = " "
 
-keymap.set("n", "<leader>y", ":%yank +<CR>", { desc = "Yank content of file into quoteplus register"})
+keymap.set("n", "<leader>yy", ":%yank +<CR>", { desc = "Yank content of file into quoteplus register"})
+keymap.set("n", "<leader>yp", ":let @+ = expand('%')<CR>", { desc = "Yank file path into quoteplus register"})
 keymap.set("n", "<leader>r", ":make<CR>:!./template < in", { desc = "Compile template.cpp and run executable"})
 
 keymap.set("n", "-", vim.cmd.Ex, { desc = "Go to netrw" })
