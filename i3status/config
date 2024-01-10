@@ -11,9 +11,8 @@ general {
         interval = 10
 }
 
-order += "battery all"
 order += "volume master"
-order += "wireless _first_"
+order += "ethernet eth0"
 order += "load"
 order += "disk /"
 order += "memory"
@@ -25,13 +24,9 @@ volume master {
   device = "pulse:0"
 }
 
-wireless _first_ {
-        format_up = "W: (%quality at %essid) %ip"
-        format_down = "W: down"
-}
-
-battery all {
-        format = "%status %percentage %remaining"
+ethernet eth0 {
+  format_up = "E: %ip (%speed)"
+  format_down = "E: down"
 }
 
 disk "/" {
