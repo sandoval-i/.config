@@ -19,3 +19,4 @@ opt.ignorecase = true
 opt.smartcase = true
 
 opt.breakindent = true
+opt.wrap = false

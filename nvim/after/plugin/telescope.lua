@@ -4,6 +4,9 @@ local keymap = vim.keymap
 keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[s]earch [f]iles" })
 keymap.set("n", "<leader>sg", builtin.git_files, { desc = "[<Space>] [s]earch [g]it files" })
 keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[s]earch [h]elp" })
+
+keymap.set("n", "<leader>gg", builtin.live_grep, { desc = "live [g]rep" })
+keymap.set("n", "<leader>gw", builtin.grep_string, { desc = "[g]rep [w]ord under cursor" })
 keymap.set("n", "<leader><space>", builtin.buffers, { desc = "[<Space>] Find existing buffers" })
 
 -- I don't use these as often. Consider removing?
