@@ -8,8 +8,8 @@ keymap.set("n", "<leader>r", ":make<CR>:!./template < in", { desc = "Compile tem
 keymap.set("n", "-", vim.cmd.Ex, { desc = "Go to netrw" })
 keymap.set("n", "<C-d>", "<C-d>zz")
 keymap.set("n", "<C-u>", "<C-u>zz")
-keymap.set("n", "n", "nzzzv")
-keymap.set("n", "N", "Nzzzv")
+keymap.set("n", "n", "nzz")
+keymap.set("n", "N", "Nzz")
 
 keymap.set("n", "<leader>co", ":copen<CR>", { desc = "Open quickfix window"})
 keymap.set("n", "<leader>cc", ":cclose<CR>", { desc = "Close quickfix window"})
