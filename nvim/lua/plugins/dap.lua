@@ -45,6 +45,10 @@ return {
               "test:no-script",
               "${fileBasename}"
             },
+            skipFiles = {
+              "${workspaceFolder}/node_modules/**/*",
+              "<node_internals>/**/*"
+            },
             rootPath = "${workspaceFolder}",
             cwd = "${workspaceFolder}",
             console = "integratedTerminal",
