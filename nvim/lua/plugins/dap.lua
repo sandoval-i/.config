@@ -26,19 +26,37 @@ return {
 
       for _, language in ipairs({ "typescript", "javascript" }) do
         client.configurations[language] = {
-          {
-            name = "Attach",
+          --[[ {
+            name = "npm run dev", // Maybe configure to attach someday?
             type = "pwa-node",
-            request = "attach",
+            request = "launch",
             processId = require'dap.utils'.pick_process,
             cwd = "${workspaceFolder}",
             port = "9229"
+          }, ]]
+          {
+            name = "npm run dev",
+            type = "pwa-node",
+            request = "launch",
+            cwd = "${workspaceFolder}",
+            runtimeExecutable = "npm",
+            runtimeArgs = {
+              "run",
+              "dev",
+            },
+            skipFiles = {
+              "${workspaceFolder}/node_modules/**/*",
+              "<node_internals>/**/*"
+            },
+            console = "integratedTerminal",
+            internalConsoleOptions = "neverOpen",
           },
           {
-            name = "Jest",
+            name = "npm run test:no-script",
             type = "pwa-node",
             request = "launch",
             -- trace = true, -- include debugger info
+            cwd = "${workspaceFolder}",
             runtimeExecutable = "npm",
             runtimeArgs = {
               "run",
@@ -49,8 +67,6 @@ return {
               "${workspaceFolder}/node_modules/**/*",
               "<node_internals>/**/*"
             },
-            rootPath = "${workspaceFolder}",
-            cwd = "${workspaceFolder}",
             console = "integratedTerminal",
             internalConsoleOptions = "neverOpen",
           }
