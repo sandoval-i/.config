@@ -5,7 +5,8 @@ return {
   event = "VeryLazy",
   opts = {
     scope = {
-      show_start = false
+      show_start = false,
+      show_end = false
     }
   },
   config = true

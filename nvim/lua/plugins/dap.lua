@@ -10,9 +10,52 @@ return {
 
       vim.keymap.set("n", "<leader>dc", function() client.continue() end, { desc = "[d]ap [c]ontinue" })
       vim.keymap.set("n", "<leader>db", function() client.toggle_breakpoint() end, { desc = "[d]ap [b]reakpoint" })
-      vim.keymap.set('n', '<leader>1', function() client.step_into() end)
-      vim.keymap.set('n', '<leader>2', function() client.step_over() end)
-      vim.keymap.set('n', '<leader>3', function() client.step_out() end)
+      vim.keymap.set('n', '<leader>1', function() client.step_into() end, { desc = "step into" })
+      vim.keymap.set('n', '<leader>2', function() client.step_over() end, { desc = "step over" })
+      vim.keymap.set('n', '<leader>3', function() client.step_out() end, { desc = "step out" })
+
+
+      client.adapters["python"] = function(cb, config)
+        -- print("el config es")
+        -- print(config)
+        if config.request == "attach" then
+          local port = (config.connect or config).port
+          local host = (config.connect or config).host or "127.0.0.1"
+          cb({
+            type = "server",
+            port = assert(port, "`connect.port` is required for a python `attach` configuration"),
+            host = host,
+            options = {
+              source_filetype = "python",
+            },
+          })
+        else
+          cb({
+            type = "executable",
+            command = os.getenv("CONDA_PREFIX") .. "/bin/python",
+            args = { "-m", "debugpy.adapter" },
+            options = {
+              source_filetype = "python",
+            },
+          })
+        end
+      end
+
+      client.configurations.python = {{
+        name = "pytest",
+        type = "python",
+        request = "launch",
+
+        -- module = "poetry",
+        -- args = {"poe", "test:no-script", "${file}"},
+        program = "${file}",
+        cwd = "${workspaceFolder}"
+
+        -- pythonPath = os.getenv("CONDA_PREFIX") .. "/bin/python",
+        -- env = {
+        --   PYTEST_ADDOPTS = "--no-cov"
+        -- }
+      }}
 
       client.adapters["pwa-node"] = {
         type = "server",
@@ -61,7 +104,7 @@ return {
             runtimeArgs = {
               "run",
               "test:no-script",
-              "${fileBasename}"
+              "${relativeFile}"
             },
             skipFiles = {
               "${workspaceFolder}/node_modules/**/*",
@@ -69,10 +112,26 @@ return {
             },
             console = "integratedTerminal",
             internalConsoleOptions = "neverOpen",
-          }
+          },
+          {
+            name = "npm run start",
+            type = "pwa-node",
+            request = "launch",
+            cwd = "${workspaceFolder}",
+            runtimeExecutable = "npm",
+            runtimeArgs = {
+              "run",
+              "start",
+            },
+            skipFiles = {
+              "${workspaceFolder}/node_modules/**/*",
+              "<node_internals>/**/*"
+            },
+            console = "integratedTerminal",
+            internalConsoleOptions = "neverOpen",
+          },
         }
       end
-
     end
   },
   {

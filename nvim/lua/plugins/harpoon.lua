@@ -16,7 +16,7 @@ return {
       }
     })
 
-    keymap.set("n", "<leader>a", function() harpoon:list():add() end, { desc = "[<Space>][a]ppend to Harpoon"})
+    keymap.set("n", "<leader>ha", function() harpoon:list():add() end, { desc = "[h]arpoon [a]dd"})
     keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
     keymap.set("n", "<C-s>", function() harpoon:list():select(1) end)
     keymap.set("n", "<C-f>", function() harpoon:list():select(2) end)

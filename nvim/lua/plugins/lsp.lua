@@ -76,7 +76,7 @@ return {
 
       return {
         completion = {
-          keyword_length = 5
+          keyword_length = 3
         },
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
@@ -121,6 +121,8 @@ return {
           vim.keymap.set("n", "<leader>lrf", function() vim.lsp.buf.references() end, { buffer = bufnr, desc = "[l]sp [r]e[f]erences"})
           vim.keymap.set("n", "<leader>lca", function() vim.lsp.buf.code_action() end, { buffer = bufnr, desc = "[l]sp [c]ode [a]ctions"})
           vim.keymap.set("n", "<leader>lrn", function() vim.lsp.buf.rename() end, { buffer = bufnr, desc = "[l]sp [r]e[n]ame"})
+          vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, { buffer = bufnr, desc = "]next [d]iagnostic"})
+          vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, { buffer = bufnr, desc = "[prev [d]iagnostic"})
         end
       )
     end

@@ -1,5 +1,6 @@
 return {
   "numToStr/Comment.nvim",
+  event = "VeryLazy",
   init = function()
     vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
       callback = function()
@@ -7,6 +8,5 @@ return {
       end
     })
   end,
-  config = true,
-  event = "VeryLazy"
+  config = true
 }
