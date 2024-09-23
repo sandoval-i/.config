@@ -3,9 +3,8 @@ return {
   opts = { -- catppuccin integration
     notification = {
       window = {
-        winblend = 0
-      }
-    }
+        winblend = 0,
+      },
+    },
   },
-  config = true
 }

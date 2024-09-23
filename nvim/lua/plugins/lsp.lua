@@ -12,16 +12,23 @@ return {
     event = "VeryLazy",
     dependencies = {
       mason,
-      nvim_lspconfig
+      nvim_lspconfig,
     },
-    config = true,
     opts = function()
       local lspconfig = require("lspconfig")
       local lsp_zero = require("lsp-zero")
       local lsp_cmp = require("cmp_nvim_lsp")
 
       return {
-        ensure_installed = { "clangd", "dockerls", "docker_compose_language_service", "jsonls", "lua_ls", "pyright", "tsserver" },
+        ensure_installed = {
+          "clangd",
+          "dockerls",
+          "docker_compose_language_service",
+          "jsonls",
+          "lua_ls",
+          "pyright",
+          "ts_ls",
+        },
         handlers = {
           lsp_zero.default_setup,
 
@@ -56,9 +63,8 @@ return {
       "hrsh7th/cmp-nvim-lua",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-path"
+      "hrsh7th/cmp-path",
     },
-    config = true,
     opts = function()
       local lsp_zero = require("lsp-zero")
       local cmp = require("cmp")
@@ -67,20 +73,20 @@ return {
       cmp.setup.cmdline(":", {
         mapping = mapping.preset.cmdline(),
         sources = cmp.config.sources({
-          { name = 'path' }
+          { name = "path" },
         }, {
-            { name = 'cmdline' }
-          }),
-        matching = { disallow_symbol_nonprefix_matching = false }
+          { name = "cmdline" },
+        }),
+        matching = { disallow_symbol_nonprefix_matching = false },
       })
 
       return {
         completion = {
-          keyword_length = 3
+          keyword_length = 3,
         },
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
-          { name = "nvim_lua" }
+          { name = "nvim_lua" },
         }, { name = "buffer" }),
         formatting = lsp_zero.cmp_format(),
         mapping = mapping.preset.insert({
@@ -94,11 +100,11 @@ return {
           ["<C-s>"] = mapping.complete(),
           ["<C-y>"] = mapping.confirm({
             select = true,
-            behavior = cmp.ConfirmBehavior.Insert
-          })
-        })
+            behavior = cmp.ConfirmBehavior.Insert,
+          }),
+        }),
       }
-    end
+    end,
   },
   {
     "VonHeikemen/lsp-zero.nvim",
@@ -109,23 +115,34 @@ return {
       nvim_lspconfig,
       cmp_lsp,
       cmp_nvim,
-      {"L3MON4D3/LuaSnip"},
+      { "L3MON4D3/LuaSnip" },
     },
     branch = "v3.x",
     config = function()
-      require("lsp-zero").on_attach(
-        function(_, bufnr)
-          -- see :help lsp-zero-keybindings to learn the available actions
-          vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, { buffer = bufnr, desc = "[g]o to [d]efinition"})
-          vim.keymap.set("n", "<leader>lh", function() vim.lsp.buf.hover() end, { buffer = bufnr, desc = "[l]sp [h]o[v]er"})
-          vim.keymap.set("n", "<leader>lrf", function() vim.lsp.buf.references() end, { buffer = bufnr, desc = "[l]sp [r]e[f]erences"})
-          vim.keymap.set("n", "<leader>lca", function() vim.lsp.buf.code_action() end, { buffer = bufnr, desc = "[l]sp [c]ode [a]ctions"})
-          vim.keymap.set("n", "<leader>lrn", function() vim.lsp.buf.rename() end, { buffer = bufnr, desc = "[l]sp [r]e[n]ame"})
-          vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, { buffer = bufnr, desc = "]next [d]iagnostic"})
-          vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, { buffer = bufnr, desc = "[prev [d]iagnostic"})
-        end
-      )
-    end
+      require("lsp-zero").on_attach(function(_, bufnr)
+        -- see :help lsp-zero-keybindings to learn the available actions
+        vim.keymap.set("n", "gd", function()
+          vim.lsp.buf.definition()
+        end, { buffer = bufnr, desc = "[g]o to [d]efinition" })
+        vim.keymap.set("n", "<leader>lh", function()
+          vim.lsp.buf.hover()
+        end, { buffer = bufnr, desc = "[l]sp [h]o[v]er" })
+        vim.keymap.set("n", "<leader>lrf", function()
+          vim.lsp.buf.references()
+        end, { buffer = bufnr, desc = "[l]sp [r]e[f]erences" })
+        vim.keymap.set("n", "<leader>lca", function()
+          vim.lsp.buf.code_action()
+        end, { buffer = bufnr, desc = "[l]sp [c]ode [a]ctions" })
+        vim.keymap.set("n", "<leader>lrn", function()
+          vim.lsp.buf.rename()
+        end, { buffer = bufnr, desc = "[l]sp [r]e[n]ame" })
+        vim.keymap.set("n", "]d", function()
+          vim.diagnostic.goto_next()
+        end, { buffer = bufnr, desc = "]next [d]iagnostic" })
+        vim.keymap.set("n", "[d", function()
+          vim.diagnostic.goto_prev()
+        end, { buffer = bufnr, desc = "[prev [d]iagnostic" })
+      end)
+    end,
   },
 }
-

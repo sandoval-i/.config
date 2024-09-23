@@ -1,4 +1,5 @@
-local litee = "ldelossa/litee.nvim"
+return {}
+--[[ local litee = "ldelossa/litee.nvim"
 
 return {
   {
@@ -23,6 +24,5 @@ return {
       on_open = "panel",
       map_resize_keys = false,
     },
-    config = true
   }
-}
+} ]]
