@@ -9,5 +9,5 @@ return {
       section_separators = "", -- fix when font with icons is working properly
     },
   },
-  dependencies = {"nvim-tree/nvim-web-devicons"},
+  dependencies = { "nvim-tree/nvim-web-devicons" },
 }

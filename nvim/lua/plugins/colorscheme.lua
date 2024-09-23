@@ -11,7 +11,7 @@ return {
         scope_color = "lavender", -- required
       },
       mason = true, -- required
-      which_key = true -- required
+      which_key = true, -- required
     },
     color_overrides = {
       mocha = {
@@ -23,6 +23,6 @@ return {
   },
   config = function(_, opts)
     require("catppuccin").setup(opts)
-    vim.cmd.colorscheme "catppuccin"
-  end
+    vim.cmd.colorscheme("catppuccin")
+  end,
 }

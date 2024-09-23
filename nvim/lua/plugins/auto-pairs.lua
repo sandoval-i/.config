@@ -1,5 +1,4 @@
 return {
   "jiangmiao/auto-pairs",
-  event = "VeryLazy"
+  event = { "BufReadPre", "BufNewFile" },
 }
-

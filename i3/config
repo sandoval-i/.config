@@ -216,15 +216,3 @@ exec i3-config-wizard
 # run xinput list to find device name, and xinput list-props to list device properties
 exec xinput set-prop "MSFT0001:00 06CB:7F28 Touchpad" "libinput Tapping Enabled" 1
 
-set $laptop eDP
-set $lg HDMI-A-0
-workspace 0 output $laptop
-workspace 1 output $lg
-workspace 2 output $lg
-workspace 3 output $lg
-workspace 4 output $lg
-workspace 5 output $lg
-workspace 6 output $lg
-workspace 7 output $lg
-workspace 8 output $lg
-workspace 9 output $laptop

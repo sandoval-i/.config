@@ -8,12 +8,21 @@ return {
     config = function()
       local client = require("dap")
 
-      vim.keymap.set("n", "<leader>dc", function() client.continue() end, { desc = "[d]ap [c]ontinue" })
-      vim.keymap.set("n", "<leader>db", function() client.toggle_breakpoint() end, { desc = "[d]ap [b]reakpoint" })
-      vim.keymap.set('n', '<leader>1', function() client.step_into() end, { desc = "step into" })
-      vim.keymap.set('n', '<leader>2', function() client.step_over() end, { desc = "step over" })
-      vim.keymap.set('n', '<leader>3', function() client.step_out() end, { desc = "step out" })
-
+      vim.keymap.set("n", "<leader>dc", function()
+        client.continue()
+      end, { desc = "[d]ap [c]ontinue" })
+      vim.keymap.set("n", "<leader>db", function()
+        client.toggle_breakpoint()
+      end, { desc = "[d]ap [b]reakpoint" })
+      vim.keymap.set("n", "<leader>1", function()
+        client.step_into()
+      end, { desc = "step into" })
+      vim.keymap.set("n", "<leader>2", function()
+        client.step_over()
+      end, { desc = "step over" })
+      vim.keymap.set("n", "<leader>3", function()
+        client.step_out()
+      end, { desc = "step out" })
 
       client.adapters["python"] = function(cb, config)
         -- print("el config es")
@@ -41,21 +50,23 @@ return {
         end
       end
 
-      client.configurations.python = {{
-        name = "pytest",
-        type = "python",
-        request = "launch",
+      client.configurations.python = {
+        {
+          name = "pytest",
+          type = "python",
+          request = "launch",
 
-        -- module = "poetry",
-        -- args = {"poe", "test:no-script", "${file}"},
-        program = "${file}",
-        cwd = "${workspaceFolder}"
+          -- module = "poetry",
+          -- args = {"poe", "test:no-script", "${file}"},
+          program = "${file}",
+          cwd = "${workspaceFolder}",
 
-        -- pythonPath = os.getenv("CONDA_PREFIX") .. "/bin/python",
-        -- env = {
-        --   PYTEST_ADDOPTS = "--no-cov"
-        -- }
-      }}
+          -- pythonPath = os.getenv("CONDA_PREFIX") .. "/bin/python",
+          -- env = {
+          --   PYTEST_ADDOPTS = "--no-cov"
+          -- }
+        },
+      }
 
       client.adapters["pwa-node"] = {
         type = "server",
@@ -63,8 +74,11 @@ return {
         port = "${port}",
         executable = {
           command = "node",
-          args = {vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js", "${port}"},
-        }
+          args = {
+            vim.fn.stdpath("data") .. "/mason/packages/js-debug-adapter/js-debug/src/dapDebugServer.js",
+            "${port}",
+          },
+        },
       }
 
       for _, language in ipairs({ "typescript", "javascript" }) do
@@ -89,7 +103,7 @@ return {
             },
             skipFiles = {
               "${workspaceFolder}/node_modules/**/*",
-              "<node_internals>/**/*"
+              "<node_internals>/**/*",
             },
             console = "integratedTerminal",
             internalConsoleOptions = "neverOpen",
@@ -104,11 +118,11 @@ return {
             runtimeArgs = {
               "run",
               "test:no-script",
-              "${relativeFile}"
+              "${relativeFile}",
             },
             skipFiles = {
               "${workspaceFolder}/node_modules/**/*",
-              "<node_internals>/**/*"
+              "<node_internals>/**/*",
             },
             console = "integratedTerminal",
             internalConsoleOptions = "neverOpen",
@@ -125,39 +139,42 @@ return {
             },
             skipFiles = {
               "${workspaceFolder}/node_modules/**/*",
-              "<node_internals>/**/*"
+              "<node_internals>/**/*",
             },
             console = "integratedTerminal",
             internalConsoleOptions = "neverOpen",
           },
         }
       end
-    end
+    end,
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
     event = "VeryLazy",
-    dependencies = {mason, nvim_dap},
+    dependencies = { mason, nvim_dap },
     opts = {
-      ensure_installed = {"js"},
-      handlers = {}
+      ensure_installed = { "js" },
+      handlers = {},
     },
-    config = true
   },
   {
     "rcarriga/nvim-dap-ui",
-    event = "VeryLazy",
-    dependencies = {nvim_dap, "nvim-neotest/nvim-nio"},
-    config = function()
-      local ui = require("dapui")
-      vim.keymap.set("n", "<leader>duit", function() ui.toggle() end, { desc = "[d]ap[u][i] [t]oggle" })
-      ui.setup()
-    end
+    dependencies = { nvim_dap, "nvim-neotest/nvim-nio" },
+    keys = {
+      {
+        "<leader>duit",
+        function()
+          require("dapui").toggle()
+        end,
+        { desc = "[d]ap[u][i] [t]oggle" },
+      },
+    },
+    config = true,
   },
   {
     "theHamsta/nvim-dap-virtual-text",
     event = "VeryLazy",
-    dependencies = {nvim_dap, "nvim-treesitter/nvim-treesitter"},
-    config = true
+    dependencies = { nvim_dap, "nvim-treesitter/nvim-treesitter" },
+    config = true,
   },
 }
