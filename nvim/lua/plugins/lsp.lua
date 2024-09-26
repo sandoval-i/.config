@@ -80,6 +80,13 @@ return {
         matching = { disallow_symbol_nonprefix_matching = false },
       })
 
+      cmp.setup.cmdline({ "/", "?" }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = "buffer" },
+        },
+      })
+
       return {
         completion = {
           keyword_length = 3,

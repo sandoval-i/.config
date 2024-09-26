@@ -21,7 +21,7 @@ return {
       function()
         require("conform").format()
       end,
-      "Format buffer",
+      "[f]ormat buffer",
     },
   },
 }
