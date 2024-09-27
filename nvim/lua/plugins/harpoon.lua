@@ -13,7 +13,7 @@ return {
         function()
           harpoon:list():add()
         end,
-        { desc = "[h]arpoon [a]dd" },
+        desc = "[h]arpoon [a]dd",
       },
       {
         "<C-e>",

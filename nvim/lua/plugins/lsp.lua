@@ -21,12 +21,13 @@ return {
 
       return {
         ensure_installed = {
+          "bashls",
           "clangd",
           "dockerls",
-          "docker_compose_language_service",
           "jsonls",
           "lua_ls",
           "pyright",
+          "terraformls",
           "ts_ls",
         },
         handlers = {
@@ -75,13 +76,15 @@ return {
         sources = cmp.config.sources({
           { name = "path" },
         }, {
-          { name = "cmdline" },
+          { name = "cmdline", option = {
+            ignore_cmds = { "Git" },
+          } },
         }),
         matching = { disallow_symbol_nonprefix_matching = false },
       })
 
       cmp.setup.cmdline({ "/", "?" }, {
-        mapping = cmp.mapping.preset.cmdline(),
+        mapping = mapping.preset.cmdline(),
         sources = {
           { name = "buffer" },
         },
@@ -94,7 +97,12 @@ return {
         sources = cmp.config.sources({
           { name = "nvim_lsp" },
           { name = "nvim_lua" },
-        }, { name = "buffer" }),
+        }),
+        snippet = {
+          function(args)
+            vim.snippet.expand(args.body)
+          end,
+        },
         formatting = lsp_zero.cmp_format(),
         mapping = mapping.preset.insert({
           ["<Up>"] = mapping.scroll_docs(-4),

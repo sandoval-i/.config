@@ -54,27 +54,27 @@ return {
       local builtin = require("telescope.builtin")
 
       return {
-        { "<leader>tr", builtin.resume, { desc = "[t]elescope [r]esume" } },
-        { "<leader><space>", builtin.buffers, { desc = "[<Space>] Find existing buffers" } },
+        { "<leader>tr", builtin.resume, desc = "[t]elescope [r]esume" },
+        { "<leader><space>", builtin.buffers, desc = "[<Space>] Find existing buffers" },
 
         -- File pickers
-        { "<leader>sf", builtin.find_files, { desc = "[s]earch [f]iles" } },
-        { "<leader>sg", builtin.git_files, { desc = "[s]earch [g]it files" } },
-        { "<leader>sh", builtin.help_tags, { desc = "[s]earch [h]elp" } },
+        { "<leader>sf", builtin.find_files, desc = "[s]earch [f]iles" },
+        { "<leader>sg", builtin.git_files, desc = "[s]earch [g]it files" },
+        { "<leader>sh", builtin.help_tags, desc = "[s]earch [h]elp" },
 
         -- Search pickers
-        { "<leader>lg", builtin.live_grep, { desc = "[l]ive [g]rep" } },
-        { "<leader>gw", builtin.grep_string, { desc = "[g]rep [w]ord under cursor" } },
+        { "<leader>lg", builtin.live_grep, desc = "[l]ive [g]rep" },
+        { "<leader>gw", builtin.grep_string, desc = "[g]rep [w]ord under cursor" },
 
         -- Git pickers
-        { "<leader>gs", builtin.git_branches, { desc = "[g]it [s]witch" } },
+        { "<leader>gs", builtin.git_branches, desc = "[g]it [s]witch" },
 
         -- Document pickers
-        { "<leader>lds", builtin.lsp_document_symbols, { desc = "[l]sp [d]ocument [s]ymbols" } },
-        { "<leader>lws", builtin.lsp_dynamic_workspace_symbols, { desc = "[l]sp [w]orkspace [s]ymbols" } },
+        { "<leader>lds", builtin.lsp_document_symbols, desc = "[l]sp [d]ocument [s]ymbols" },
+        { "<leader>lws", builtin.lsp_dynamic_workspace_symbols, desc = "[l]sp [w]orkspace [s]ymbols" },
 
         -- I don't use these as often. Consider removing?
-        { "<leader>?", builtin.oldfiles, { desc = "[?] Find recently opened files" } },
+        { "<leader>?", builtin.oldfiles, desc = "[?] Find recently opened files" },
         {
           "<leader>/",
           function()
@@ -84,7 +84,7 @@ return {
               previewer = false,
             }))
           end,
-          { desc = "[/] Fuzzily search in current buffer" },
+          desc = "[/] Fuzzily search in current buffer",
         },
       }
     end,

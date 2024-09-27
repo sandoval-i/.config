@@ -5,68 +5,50 @@ return {
   {
     nvim_dap,
     event = "VeryLazy",
-    config = function()
+    dependencies = { mason },
+    keys = function()
       local client = require("dap")
 
-      vim.keymap.set("n", "<leader>dc", function()
-        client.continue()
-      end, { desc = "[d]ap [c]ontinue" })
-      vim.keymap.set("n", "<leader>db", function()
-        client.toggle_breakpoint()
-      end, { desc = "[d]ap [b]reakpoint" })
-      vim.keymap.set("n", "<leader>1", function()
-        client.step_into()
-      end, { desc = "step into" })
-      vim.keymap.set("n", "<leader>2", function()
-        client.step_over()
-      end, { desc = "step over" })
-      vim.keymap.set("n", "<leader>3", function()
-        client.step_out()
-      end, { desc = "step out" })
-
-      client.adapters["python"] = function(cb, config)
-        -- print("el config es")
-        -- print(config)
-        if config.request == "attach" then
-          local port = (config.connect or config).port
-          local host = (config.connect or config).host or "127.0.0.1"
-          cb({
-            type = "server",
-            port = assert(port, "`connect.port` is required for a python `attach` configuration"),
-            host = host,
-            options = {
-              source_filetype = "python",
-            },
-          })
-        else
-          cb({
-            type = "executable",
-            command = os.getenv("CONDA_PREFIX") .. "/bin/python",
-            args = { "-m", "debugpy.adapter" },
-            options = {
-              source_filetype = "python",
-            },
-          })
-        end
-      end
-
-      client.configurations.python = {
+      return {
         {
-          name = "pytest",
-          type = "python",
-          request = "launch",
-
-          -- module = "poetry",
-          -- args = {"poe", "test:no-script", "${file}"},
-          program = "${file}",
-          cwd = "${workspaceFolder}",
-
-          -- pythonPath = os.getenv("CONDA_PREFIX") .. "/bin/python",
-          -- env = {
-          --   PYTEST_ADDOPTS = "--no-cov"
-          -- }
+          "<leader>dc",
+          function()
+            client.continue()
+          end,
+          desc = "[d]ap [c]ontinue",
+        },
+        {
+          "<leader>db",
+          function()
+            client.toggle_breakpoint()
+          end,
+          desc = "[d]ap [b]reakpoint",
+        },
+        {
+          "<leader>1",
+          function()
+            client.step_into()
+          end,
+          desc = "step into",
+        },
+        {
+          "<leader>2",
+          function()
+            client.step_over()
+          end,
+          desc = "step over",
+        },
+        {
+          "<leader>3",
+          function()
+            client.step_out()
+          end,
+          desc = "step out",
         },
       }
+    end,
+    config = function()
+      local client = require("dap")
 
       client.adapters["pwa-node"] = {
         type = "server",
@@ -81,33 +63,8 @@ return {
         },
       }
 
-      for _, language in ipairs({ "typescript", "javascript" }) do
+      for _, language in ipairs({ "typescript" }) do
         client.configurations[language] = {
-          --[[ {
-            name = "npm run dev", // Maybe configure to attach someday?
-            type = "pwa-node",
-            request = "launch",
-            processId = require'dap.utils'.pick_process,
-            cwd = "${workspaceFolder}",
-            port = "9229"
-          }, ]]
-          {
-            name = "npm run dev",
-            type = "pwa-node",
-            request = "launch",
-            cwd = "${workspaceFolder}",
-            runtimeExecutable = "npm",
-            runtimeArgs = {
-              "run",
-              "dev",
-            },
-            skipFiles = {
-              "${workspaceFolder}/node_modules/**/*",
-              "<node_internals>/**/*",
-            },
-            console = "integratedTerminal",
-            internalConsoleOptions = "neverOpen",
-          },
           {
             name = "npm run test:no-script",
             type = "pwa-node",
@@ -119,23 +76,6 @@ return {
               "run",
               "test:no-script",
               "${relativeFile}",
-            },
-            skipFiles = {
-              "${workspaceFolder}/node_modules/**/*",
-              "<node_internals>/**/*",
-            },
-            console = "integratedTerminal",
-            internalConsoleOptions = "neverOpen",
-          },
-          {
-            name = "npm run start",
-            type = "pwa-node",
-            request = "launch",
-            cwd = "${workspaceFolder}",
-            runtimeExecutable = "npm",
-            runtimeArgs = {
-              "run",
-              "start",
             },
             skipFiles = {
               "${workspaceFolder}/node_modules/**/*",
@@ -160,13 +100,14 @@ return {
   {
     "rcarriga/nvim-dap-ui",
     dependencies = { nvim_dap, "nvim-neotest/nvim-nio" },
+    event = "VeryLazy",
     keys = {
       {
         "<leader>duit",
         function()
           require("dapui").toggle()
         end,
-        { desc = "[d]ap[u][i] [t]oggle" },
+        desc = "[d]ap[u][i] [t]oggle",
       },
     },
     config = true,

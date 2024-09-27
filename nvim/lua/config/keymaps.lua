@@ -7,13 +7,6 @@ keymap.set("n", "<leader>yc", "ggcG", { desc = "Change file content" })
 keymap.set("n", "<leader>yp", ":let @+ = expand('%')<CR>", { desc = "Yank file path into quoteplus register" })
 keymap.set("n", "<leader>r", ":make<CR>:!./template < in", { desc = "Compile template.cpp and run executable" })
 
-keymap.set("t", "<Esc>", "<C-\\><C-N>")
-vim.api.nvim_create_autocmd({ "FileType" }, {
-  pattern = { "floaterm" },
-  callback = function()
-    keymap.set("n", "<Esc>", ":close<CR>", { buffer = true })
-  end,
-})
 keymap.set("n", "-", vim.cmd.Ex)
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
