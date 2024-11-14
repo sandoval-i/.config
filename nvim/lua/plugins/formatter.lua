@@ -9,6 +9,7 @@ return {
     },
     formatters_by_ft = {
       cpp = { "clang-format" },
+      html = { "prettierd" },
       json = { "jq" },
       lua = { "stylua" },
       typescript = { "eslint_d", "prettierd" },

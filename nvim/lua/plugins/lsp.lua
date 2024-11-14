@@ -6,6 +6,8 @@ local nvim_lspconfig = "neovim/nvim-lspconfig"
 local cmp_nvim = "hrsh7th/nvim-cmp"
 local cmp_lsp = "hrsh7th/cmp-nvim-lsp"
 
+local luasnip = "L3MON4D3/LuaSnip"
+
 return {
   {
     mason_lspconfig,
@@ -36,6 +38,9 @@ return {
           clangd = function()
             lspconfig.clangd.setup({
               capabilities = lsp_cmp.default_capabilities(),
+              init_options = {
+                fallbackFlags = { "-std=c++20" },
+              },
             })
           end,
 
@@ -122,6 +127,12 @@ return {
     end,
   },
   {
+    luasnip,
+    version = "2.*",
+    event = "VeryLazy",
+    build = "make install_jsregexp",
+  },
+  {
     "VonHeikemen/lsp-zero.nvim",
     event = "VeryLazy",
     dependencies = {
@@ -130,7 +141,7 @@ return {
       nvim_lspconfig,
       cmp_lsp,
       cmp_nvim,
-      { "L3MON4D3/LuaSnip" },
+      luasnip,
     },
     branch = "v3.x",
     config = function()
