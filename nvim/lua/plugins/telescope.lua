@@ -31,16 +31,6 @@ return {
         },
       },
       pickers = {
-        git_branches = {
-          mappings = {
-            i = {
-              ["<C-d>"] = "results_scrolling_down",
-            },
-            n = {
-              ["d"] = "git_delete_branch",
-            },
-          },
-        },
         buffers = {
           mappings = {
             i = {
