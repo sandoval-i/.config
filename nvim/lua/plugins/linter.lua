@@ -1,16 +1,28 @@
-return {
-  "mfussenegger/nvim-lint",
-  event = { "BufReadPre", "BufNewFile" },
-  config = function()
-    require("lint").linters_by_ft = {
-      typescript = { "eslint_d" },
-      json = { "jq" },
-    }
+local mason = "williamboman/mason.nvim"
+local nvim_lint = "mfussenegger/nvim-lint"
 
-    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-      callback = function()
-        require("lint").try_lint()
-      end,
-    })
-  end,
+return {
+  {
+    nvim_lint,
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("lint").linters_by_ft = {
+        typescript = { "eslint_d" },
+        json = { "jsonlint" },
+      }
+
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        callback = function()
+          require("lint").try_lint()
+        end,
+      })
+    end,
+  },
+  {
+    "rshkarin/mason-nvim-lint",
+    dependencies = { mason, nvim_lint },
+    opts = {
+      ensure_installed = { "eslint_d", "jsonlint" },
+    },
+  },
 }
