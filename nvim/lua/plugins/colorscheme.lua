@@ -3,6 +3,7 @@ return {
   name = "catppuccin",
   priority = 1000,
   opts = {
+    flavour = "mocha",
     integrations = {
       fidget = true, -- required
       gitsigns = false, -- required
@@ -12,13 +13,6 @@ return {
       },
       mason = true, -- required
       which_key = true, -- required
-    },
-    color_overrides = {
-      mocha = {
-        base = "#000000",
-        mantle = "#000000",
-        crust = "#000000",
-      },
     },
   },
   config = function(_, opts)

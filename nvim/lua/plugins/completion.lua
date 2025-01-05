@@ -15,7 +15,10 @@ return {
     dependencies = "rafamadriz/friendly-snippets",
     version = "*",
     opts = {
-      keymap = { preset = "default" },
+      keymap = {
+        preset = "default",
+        ["<C-s>"] = { "show", "show_documentation", "hide_documentation" },
+      },
 
       sources = {
         min_keyword_length = 3,

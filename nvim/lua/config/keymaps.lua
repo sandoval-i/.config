@@ -10,6 +10,7 @@ keymap.set("n", "<leader>r", ":make<CR>:!./template < in", { desc = "Compile tem
 keymap.set("n", "-", vim.cmd.Ex)
 keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+keymap.set("v", "y", "ygv<Esc>")
 keymap.set("n", "<C-d>", "<C-d>zz")
 keymap.set("n", "<C-u>", "<C-u>zz")
 keymap.set("n", "n", "nzz")
