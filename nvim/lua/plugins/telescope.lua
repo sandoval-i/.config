@@ -1,22 +1,19 @@
-local fzf = "nvim-telescope/telescope-fzf-native.nvim"
-local ui_select = "nvim-telescope/telescope-ui-select.nvim"
-
 return {
-  {
-    fzf,
-    build = "make",
-    lazy = true,
-  },
-  {
-    ui_select,
-    lazy = true,
-  },
   {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      fzf,
+      "nvim-telescope/telescope-ui-select.nvim",
+      {
+        "ahmedkhalf/project.nvim",
+        main = "project_nvim",
+        config = true,
+      },
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+      },
     },
     opts = {
       defaults = {
@@ -38,9 +35,14 @@ return {
             },
           },
         },
+        lsp_definitions = {
+          theme = "dropdown",
+          show_line = false,
+        },
       },
     },
     keys = function()
+      local telescope = require("telescope")
       local builtin = require("telescope.builtin")
 
       return {
@@ -59,16 +61,23 @@ return {
         -- Git pickers
         { "<leader>gs", builtin.git_branches, desc = "[g]it [s]witch" },
 
-        -- Document pickers
+        -- Lsp pickers
         { "<leader>lds", builtin.lsp_document_symbols, desc = "[l]sp [d]ocument [s]ymbols" },
         { "<leader>lws", builtin.lsp_dynamic_workspace_symbols, desc = "[l]sp [w]orkspace [s]ymbols" },
+        { "<leader>lrf", builtin.lsp_references, desc = "[l]sp [r]eferences" },
+        { "<leader>lic", builtin.lsp_incoming_calls, desc = "[l]sp [i]ncoming [c]alls" },
+        { "gd", builtin.lsp_definitions, desc = "[g]o to [d]efinition" },
+
+        -- TO DO: Learn how to use fuzzy search with regex to match files under src/** only
+
+        { "<leader>tp", telescope.extensions.projects.projects, desc = "[t]elescope [p]rojects" },
+        -- TO DO: configure so that it deletes every buffer :%bd, and opens netrw to the recently-changed project end,
 
         -- I don't use these as often. Consider removing?
         { "<leader>?", builtin.oldfiles, desc = "[?] Find recently opened files" },
         {
           "<leader>/",
           function()
-            -- You can pass additional configuration to telescope to change theme, layout, etc.
             builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
               winblend = 10,
               previewer = false,
@@ -84,6 +93,7 @@ return {
       telescope.setup(opts)
       telescope.load_extension("fzf")
       telescope.load_extension("ui-select")
+      telescope.load_extension("projects")
     end,
   },
 }

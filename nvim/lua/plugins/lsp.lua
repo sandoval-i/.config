@@ -57,12 +57,6 @@ return {
     config = function(_, opts)
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)
-          vim.keymap.set("n", "gd", function()
-            vim.lsp.buf.definition()
-          end, { buffer = args.buf, desc = "[g]o to [d]efinition" })
-          vim.keymap.set("n", "<leader>lrf", function()
-            vim.lsp.buf.references()
-          end, { buffer = args.buf, desc = "[l]sp [r]e[f]erences" })
           vim.keymap.set("n", "<leader>lca", function()
             vim.lsp.buf.code_action()
           end, { buffer = args.buf, desc = "[l]sp [c]ode [a]ctions" })

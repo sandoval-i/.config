@@ -1,6 +1,8 @@
+local treesitter = "nvim-treesitter/nvim-treesitter"
+
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
+    treesitter,
     event = "VeryLazy",
     build = ":TSUpdate",
     main = "nvim-treesitter.configs",
@@ -26,13 +28,54 @@ return {
           return true
         end
       end,
+
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true,
+          keymaps = {
+            ["af"] = "@function.outer",
+            ["if"] = "@function.inner",
+          }
+        },
+
+        move = {
+          enable = true,
+          set_jumps = true,
+          goto_next_start = {
+            ["]s"] = "@function.outer"
+          },
+          goto_previous_start = {
+            ["[s"] = "@function.outer"
+          },
+
+          goto_next_end = {
+            ["]e"] = "@function.outer"
+          },
+          goto_previous_end = {
+            ["[e"] = "@function.outer"
+          }
+        }
+      },
     },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    dependencies = { treesitter },
   },
   {
     "nvim-treesitter/nvim-treesitter-context",
     event = "VeryLazy",
     opts = {
       max_lines = 3,
+    },
+    keys = {
+      {
+        "[c",
+        function()
+          require("treesitter-context").go_to_context(vim.v.count1)
+        end,
+      },
     },
   },
 }
