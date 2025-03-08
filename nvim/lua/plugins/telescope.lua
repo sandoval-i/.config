@@ -6,11 +6,6 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-ui-select.nvim",
       {
-        "ahmedkhalf/project.nvim",
-        main = "project_nvim",
-        config = true,
-      },
-      {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
       },
@@ -42,7 +37,6 @@ return {
       },
     },
     keys = function()
-      local telescope = require("telescope")
       local builtin = require("telescope.builtin")
 
       return {
@@ -59,7 +53,8 @@ return {
         { "<leader>gw", builtin.grep_string, desc = "[g]rep [w]ord under cursor" },
 
         -- Git pickers
-        { "<leader>gs", builtin.git_branches, desc = "[g]it [s]witch" },
+        { "<leader>gbr", builtin.git_branches, desc = "[g]it [br]anches" },
+        { "<leader>gs", builtin.git_status, desc = "[g]it [s]tatus" },
 
         -- Lsp pickers
         { "<leader>lds", builtin.lsp_document_symbols, desc = "[l]sp [d]ocument [s]ymbols" },
@@ -69,9 +64,6 @@ return {
         { "gd", builtin.lsp_definitions, desc = "[g]o to [d]efinition" },
 
         -- TO DO: Learn how to use fuzzy search with regex to match files under src/** only
-
-        { "<leader>tp", telescope.extensions.projects.projects, desc = "[t]elescope [p]rojects" },
-        -- TO DO: configure so that it deletes every buffer :%bd, and opens netrw to the recently-changed project end,
 
         -- I don't use these as often. Consider removing?
         { "<leader>?", builtin.oldfiles, desc = "[?] Find recently opened files" },
@@ -93,7 +85,6 @@ return {
       telescope.setup(opts)
       telescope.load_extension("fzf")
       telescope.load_extension("ui-select")
-      telescope.load_extension("projects")
     end,
   },
 }

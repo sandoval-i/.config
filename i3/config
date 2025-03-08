@@ -214,3 +214,7 @@ bar {
 exec i3-config-wizard
 # run xinput list to find device name, and xinput list-props to list device properties
 exec xinput set-prop "MSFT0001:00 06CB:7F28 Touchpad" "libinput Tapping Enabled" 1
+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous

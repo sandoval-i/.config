@@ -4,7 +4,7 @@ return {
     event = "VeryLazy",
     keys = {
       { "<leader>git", vim.cmd.Git, desc = "[g][i][t]" },
-      { "<leader>gb", ":Git blame<CR>", desc = "[g]it [b]lame" },
+      { "<leader>gbl", ":Git blame<CR>", desc = "[g]it [bl]ame" },
       { "<leader>gf", ":Git fetch -p origin<CR>", desc = "[g]it [f]etch -p origin" },
       { "<leader>gp", ":Git pull<CR>", desc = "[g]it [p]ull" },
       { "<leader>gl", ":Git log<CR>", desc = "[g]it [l]og" },
