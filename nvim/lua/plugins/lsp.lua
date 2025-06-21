@@ -1,11 +1,11 @@
-local mason = "williamboman/mason.nvim"
-local mason_lspconfig = "williamboman/mason-lspconfig.nvim"
+local mason = "mason-org/mason.nvim"
+local mason_lspconfig = "mason-org/mason-lspconfig.nvim"
 local nvim_lspconfig = "neovim/nvim-lspconfig"
 local blink = "saghen/blink.cmp"
 
 return {
   {
-    "williamboman/mason.nvim",
+    mason,
     config = true,
   },
   {
