@@ -26,7 +26,7 @@ return {
         function()
           require("conform").format()
         end,
-        "[f]ormat buffer",
+        desc = "[f]ormat buffer",
       },
     },
   },
