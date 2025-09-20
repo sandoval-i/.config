@@ -5,8 +5,9 @@ return {
     options = {
       icons_enabled = false,
       theme = "tokyonight",
-      component_separators = "|", -- fix when font with icons is working properly
-      section_separators = "", -- fix when font with icons is working properly
+    },
+    sections = {
+      lualine_z = { "location", "lsp_status" },
     },
   },
   dependencies = { "nvim-tree/nvim-web-devicons" },
