@@ -3,4 +3,5 @@
 !nvim/
 !i3/
 !i3status/
+!bash/
 nvim/lazy-lock.json

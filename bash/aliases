@@ -1,0 +1,3 @@
+alias out='i3-msg exit'
+alias rb='systemctl reboot'
+alias sdn='systemctl poweroff'
