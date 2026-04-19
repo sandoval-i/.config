@@ -3,9 +3,7 @@ local treesitter = "nvim-treesitter/nvim-treesitter"
 return {
   {
     treesitter,
-    event = "VeryLazy",
     build = ":TSUpdate",
-    main = "nvim-treesitter.configs",
     opts = {
       ensure_installed = {
         "cpp",
